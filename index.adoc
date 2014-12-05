@@ -1,3 +1,4 @@
 = DCS-BIOS
 
 This will become the website of the DCS-BIOS project.
+It is hosted under the https://github.com/dcs-bios/[dcs-bios organization] on GitHub.
