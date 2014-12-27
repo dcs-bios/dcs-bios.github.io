@@ -1,15 +1,21 @@
-== About DCS-BIOS
+=== About DCS-BIOS
 
 DCS-BIOS is a community-maintained `Export.lua` file for use with http://www.digitalcombatsimulator.com/[DCS: World].
 It provides a stable, documented interface for external hardware and software to interact with the clickable cockpit of a DCS: World aircraft.
 
-== Download
+=== Download
 
 * https://github.com/dcs-bios/dcs-bios/releases/latest[DCS-BIOS]
 * https://github.com/dcs-bios/dcs-bios-arduino-library/releases/latest[Arduino Library]
 
-== Documentation
+=== Documentation
 
 * link:docs/v0.1.0/userguide.html[User Guide for v0.1.0]
 * link:docs/v0.1.0/developerguide.html[Developer Guide for v0.1.0]
 * link:docs/v0.1.0/control-reference.html[Control Reference for v0.1.0]
+
+=== Get Help and Get Involved
+
+DCS-BIOS is developed as an open-source project https://github.com/dcs-bios[on GitHub.]
+
+If you have found a bug or have a question, please https://github.com/dcs-bios/dcs-bios/issues/new[open a new issue on our GitHub issue tracker.]
