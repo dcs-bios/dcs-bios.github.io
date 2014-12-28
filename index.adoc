@@ -10,6 +10,7 @@ It provides a stable, documented interface for external hardware and software to
 
 === Documentation
 
+* https://www.youtube.com/channel/UCwECFPfC3QJiNYS5fskF2vg[DCS-BIOS YouTube Channel]
 * link:docs/v0.1.0/userguide.html[User Guide for v0.1.0]
 * link:docs/v0.1.0/developerguide.html[Developer Guide for v0.1.0]
 * link:docs/v0.1.0/control-reference.html[Control Reference for v0.1.0]
