@@ -1,0 +1,10 @@
+
+.v0.1.2
+* link:docs/v0.1.2/userguide.html[User Guide for v0.1.2]
+* link:docs/v0.1.2/developerguide.html[Developer Guide for v0.1.2]
+* link:docs/v0.1.2/control-reference.html[Control Reference for v0.1.2]
+
+.master (bleeding edge)
+* link:docs/master/userguide.html[User Guide for master]
+* link:docs/master/developerguide.html[Developer Guide for master]
+* link:docs/master/control-reference.html[Control Reference for master]
