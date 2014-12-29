@@ -87,9 +87,9 @@ function rawStringToBuffer( str ) {
 }
 
 $(function() {
-	if (typeof chrome == "undefined") return;
-	if (!chrome.sockets) return;
-	if (!chrome.sockets.tcp) return;
+	if (!chrome || !chrome.sockets || !chrome.sockets.tcp) {
+		return; // not running as chrome app
+	}
 	
     var socketId;
 	var parser = ProtocolParser();
