@@ -516,7 +516,13 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_synchronization_sequence">Synchronization sequence</a></li>
 </ul>
 </li>
-<li><a href="#_an_in_depth_look_at_the_arduino_library">An In-Depth Look at the Arduino Library</a></li>
+<li><a href="#_an_in_depth_look_at_the_arduino_library">An In-Depth Look at the Arduino Library</a>
+<ul class="sectlevel2">
+<li><a href="#_pollinginput">PollingInput</a></li>
+<li><a href="#_exportstreamlistener">ExportStreamListener</a></li>
+<li><a href="#_protocolparser">ProtocolParser</a></li>
+</ul>
+</li>
 <li><a href="#_the_dcs_bios_lua_code">The DCS-BIOS Lua Code</a>
 <ul class="sectlevel2">
 <li><a href="#_memorymap_objects">MemoryMap objects</a></li>
@@ -626,8 +632,8 @@ In the input direction, the added verbosity of a plain text protocol is no probl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>char[] state;
-unsigned int value = (((uint16_t*)state)[start_address/2] &amp; mask) &gt;&gt; shift</pre>
+<pre class="CodeRay highlight"><code data-lang="c"><span class="predefined-type">char</span>[] state;
+<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> value = (((uint16_t*)state)[start_address/<span class="integer">2</span>] &amp; mask) &gt;&gt; shift</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -682,7 +688,34 @@ In the event that the byte sequence <code>0x55 0x55 0x55 0x55</code> would appea
 <div class="sect1">
 <h2 id="_an_in_depth_look_at_the_arduino_library">An In-Depth Look at the Arduino Library</h2>
 <div class="sectionbody">
-
+<div class="sect2">
+<h3 id="_pollinginput">PollingInput</h3>
+<div class="paragraph">
+<p>The <code>DcsBios::PollingInput</code> class is the base class of all input classes such as <code>Switch2Pos</code> or <code>RotaryEncoder</code>.</p>
+</div>
+<div class="paragraph">
+<p>If your class inherits from <code>PollingInput</code>, its <code>pollInput()</code> method will be called whenever <code>DcsBios::PollingInput::pollInputs()</code> is called from the main loop.</p>
+</div>
+<div class="paragraph">
+<p>To make this happen, the constructor of <code>PollingInput</code> maintains a global singly-linked list of all <code>PollingInput</code> instances.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exportstreamlistener">ExportStreamListener</h3>
+<div class="paragraph">
+<p>If your class inherits from <code>ExportStreamListener</code>, its <code>onDcsBiosWrite(unsigned int address, unsigned int data)</code> method will be called every time a <code>ProtocolParser</code> finishes receiving new export stream data.</p>
+</div>
+<div class="paragraph">
+<p>Its <code>onDcsBiosFrameSync()</code> method will be called every time the synchronization sequence (<code>0x55 0x55 0x55 0x55</code>) is received.
+The <code>StringBuffer</code> class uses this to avoid calling your code with an inconsistent string mid-update.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protocolparser">ProtocolParser</h3>
+<div class="paragraph">
+<p>If you feed the export stream data you receive from DCS-BIOS to the <code>processChar</code> method of a <code>ProtocolParser</code> instance, it will interpret the data and ensure that the global <code>onDcsBiosWrite</code> function as well as every <code>ExportStreamListener&#8217;s `onDcsBiosWrite</code> and <code>onDcsBiosFrameSync</code> methods are called with the results.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -701,7 +734,7 @@ In the event that the byte sequence <code>0x55 0x55 0x55 0x55</code> would appea
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-07 16:51:40 CET
+Last updated 2015-01-07 16:51:27 CET
 </div>
 </div>
 </body>
