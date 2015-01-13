@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>About DCS-BIOS</title>
+<title>DCS-BIOS Developer Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -408,6 +408,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
 <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
 /*pre.CodeRay {background-color:#f7f7f8;}*/
@@ -500,67 +501,240 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .head .head{color:#f4f}
 </style>
 </head>
-<body class="article">
+<body class="article toc2 toc-right">
 <div id="header">
+<h1>DCS-BIOS Developer Guide</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_connecting_to_dcs_bios">Connecting to DCS-BIOS</a></li>
+<li><a href="#_the_dcs_bios_import_protocol">The DCS-BIOS Import Protocol</a></li>
+<li><a href="#_the_dcs_bios_export_protocol">The DCS-BIOS Export Protocol</a>
+<ul class="sectlevel2">
+<li><a href="#_integer_values">Integer Values</a></li>
+<li><a href="#_string_values">String Values</a></li>
+<li><a href="#_synchronization_sequence">Synchronization sequence</a></li>
+</ul>
+</li>
+<li><a href="#_an_in_depth_look_at_the_arduino_library">An In-Depth Look at the Arduino Library</a>
+<ul class="sectlevel2">
+<li><a href="#_pollinginput">PollingInput</a></li>
+<li><a href="#_exportstreamlistener">ExportStreamListener</a></li>
+<li><a href="#_protocolparser">ProtocolParser</a></li>
+</ul>
+</li>
+<li><a href="#_the_dcs_bios_lua_code">The DCS-BIOS Lua Code</a>
+<ul class="sectlevel2">
+<li><a href="#_memorymap_objects">MemoryMap objects</a></li>
+<li><a href="#_adding_a_new_aircraft_module">Adding a New Aircraft Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="content">
-<div class="sect2">
-<h3 id="_about_dcs_bios">About DCS-BIOS</h3>
+<div class="sect1">
+<h2 id="_connecting_to_dcs_bios">Connecting to DCS-BIOS</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>DCS-BIOS is a community-maintained <code>Export.lua</code> file for use with <a href="http://www.digitalcombatsimulator.com/">DCS: World</a>.
-It provides a stable, documented interface for external hardware and software to interact with the clickable cockpit of a DCS: World aircraft.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_download">Download</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/dcs-bios/dcs-bios/releases/latest">DCS-BIOS</a></p>
-</li>
-<li>
-<p><a href="https://github.com/dcs-bios/dcs-bios-arduino-library/releases/latest">Arduino Library</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_documentation">Documentation</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.youtube.com/channel/UCwECFPfC3QJiNYS5fskF2vg/videos">DCS-BIOS YouTube Channel</a></p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title">v0.2.2</div>
-<ul>
-<li>
-<p><a href="docs/v0.2.2/userguide.html">User Guide for v0.2.2</a></p>
-</li>
-<li>
-<p><a href="docs/v0.2.2/developerguide.html">Developer Guide for v0.2.2</a></p>
-</li>
-<li>
-<p><a href="docs/v0.2.2/control-reference.html">Control Reference for v0.2.2</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_get_help_and_get_involved">Get Help and Get Involved</h3>
-<div class="paragraph">
-<p>DCS-BIOS is developed as an open-source project <a href="https://github.com/dcs-bios">on GitHub.</a></p>
+<p>Controls in the cockpit can be manipulated by sending newline-terminated plain text commands to UDP port 7778.
+The syntax is described in the <a href="#_the_dcs_bios_import_protocol">The DCS-BIOS Import Protocol</a> section.</p>
 </div>
 <div class="paragraph">
-<p>If you have found a bug or have a question, please <a href="https://github.com/dcs-bios/dcs-bios/issues/new">open a new issue on our GitHub issue tracker.</a></p>
+<p>The current state of cockpit indicators and controls is exported from DCS using a binary protocol (see <a href="#_the_dcs_bios_export_protocol">The DCS-BIOS Export Protocol</a>). This data is sent via UDP to multicast address 239.255.50.10, port 5010 on the loopback interface (127.0.0.1).</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+When opening a UDP socket to listen on 239.255.50.10:5010, you must specify the <code>allowreuseaddr</code> socket option.
+Otherwise Windows will prevent other programs from listening to the same data stream.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The IPv4 multicast address block 239.255.0.0/16 is defined in RFC 2365 as the "IPv4 Local Scope".
+It is part of the "Administratively Scoped IPv4 Multicast Space", which is to multicast as the private address ranges 10.0.0.0/8, 192.168.0.0/16 and 172.16.0.0/12 are to unicast Ipv4.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you cannot or do not want to deal with multicast UDP, you can also make DCS-BIOS send a copy of the export data stream to a unicast address by editing <code>BIOSConfig.lua</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can also use the <code>socat</code> utility to connect a serial port (and just about anything else that can be read or written) to the DCS-BIOS import and export streams.
+For an example, take a look at the batch files that come with DCS-BIOS.</p>
+</div>
+<div class="paragraph">
+<p>Another way is to open a TCP connection to port 7778.
+You can use this connection to send commands to DCS-BIOS and receive the export data.
+If you can, use UDP instead of TCP.
+Each TCP connection slightly increases the amount of work that is performed inside of DCS (blocking the rest of the simulation).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_dcs_bios_import_protocol">The DCS-BIOS Import Protocol</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commands are sent to DCS-BIOS as lines of plain text.</p>
+</div>
+<div class="paragraph">
+<p>A command consists of a control identifier, a space, an argument and a newline character.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The import protocol does not use binary encodings.
+Handling binary data in Lua with only the libraries that come with DCS is cumbersome.
+Also, a plain text protocol is easier to explain, understand and debug.
+In the input direction, the added verbosity of a plain text protocol is no problem because a human pilot will not flip 20 switches 30 times a second.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To find out the arguments that a certain control accepts, refer to the reference documentation and look up <em>input interfaces</em> in the User Guide.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_dcs_bios_export_protocol">The DCS-BIOS Export Protocol</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The export stream protocol is designed to be as space-efficient as possible to enable the export of the complete cockpit state over a 115200 bps serial connection.</p>
+</div>
+<div class="paragraph">
+<p>Each piece of cockpit state is encoded as an integer or a string and is assigned an address within a 16-bit address space.</p>
+</div>
+<div class="sect2">
+<h3 id="_integer_values">Integer Values</h3>
+<div class="paragraph">
+<p>The location of an integer value is defined by a 16-bit word address which specifies the start of the 16-bit word in which the data is located, a 16-bit mask which specifies which bits in that word belong to the value, and a shift value (which can also be deduced from the mask).</p>
+</div>
+<div class="paragraph">
+<p>Given the start address, mask and shift values, the following pseudo C code decodes a value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="c"><span class="predefined-type">char</span>[] state;
+<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> value = (((uint16_t*)state)[start_address/<span class="integer">2</span>] &amp; mask) &gt;&gt; shift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Changes to the state data are encoded as write accesses to this address space and written to the export data stream in the following format:</p>
+</div>
+<div class="paragraph">
+<p><code>&lt;start address (16 bit)&gt;</code> <code>&lt;data length (16 bit)&gt;</code> <code>data</code></p>
+</div>
+<div class="paragraph">
+<p>Both the start address and the data length will always be even (internally, DCS-BIOS treats the data as a list of 16-bit integers).
+This ensures that no write access partially updates an integer value (an integer may occupy no more than 16 bit).</p>
+</div>
+<div class="paragraph">
+<p>All integer values are written in litte-endian byte order.</p>
+</div>
+<div class="paragraph">
+<p>The following byte sequence is an example of a write access of four bytes starting at address 0x1000:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>0x00 0x10 0x04 0x00 0x41 0x2d 0x31 0x30</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_string_values">String Values</h3>
+<div class="paragraph">
+<p>The location of a string is defined by its 16-bit start address and the length in bytes (all string values have a fixed maximum length and start on a 16-bit aligned address).</p>
+</div>
+<div class="paragraph">
+<p>A string value with a maximum length greater than two characters can be updated partially.
+To avoid inconsistent intermediate states, an application that receives DCS-BIOS export data should apply changes to string values at the next frame synchronization sequence (see next section).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_synchronization_sequence">Synchronization sequence</h3>
+<div class="paragraph">
+<p>DCS-BIOS tries to send 30 updates per second.</p>
+</div>
+<div class="paragraph">
+<p>DCS-BIOS will send the four bytes <code>0x55 0x55 0x55 0x55</code> at the start of each update.
+These do <strong>not</strong> specify a 21845-byte write access to the address 0x5555.
+Instead, they are used by consumers of the data stream to find the start of a write access to synchronize to.</p>
+</div>
+<div class="paragraph">
+<p>DCS-BIOS ensures that this byte sequence cannot appear in the normal data stream.
+In the event that the byte sequence <code>0x55 0x55 0x55 0x55</code> would appear in a single write access, DCS-BIOS will avoid that by splitting it up into two separate writes.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_an_in_depth_look_at_the_arduino_library">An In-Depth Look at the Arduino Library</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_pollinginput">PollingInput</h3>
+<div class="paragraph">
+<p>The <code>DcsBios::PollingInput</code> class is the base class of all input classes such as <code>Switch2Pos</code> or <code>RotaryEncoder</code>.</p>
+</div>
+<div class="paragraph">
+<p>If your class inherits from <code>PollingInput</code>, its <code>pollInput()</code> method will be called whenever <code>DcsBios::PollingInput::pollInputs()</code> is called from the main loop.</p>
+</div>
+<div class="paragraph">
+<p>To make this happen, the constructor of <code>PollingInput</code> maintains a global singly-linked list of all <code>PollingInput</code> instances.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exportstreamlistener">ExportStreamListener</h3>
+<div class="paragraph">
+<p>If your class inherits from <code>ExportStreamListener</code>, its <code>onDcsBiosWrite(unsigned int address, unsigned int data)</code> method will be called every time a <code>ProtocolParser</code> finishes receiving new export stream data.</p>
+</div>
+<div class="paragraph">
+<p>Its <code>onDcsBiosFrameSync()</code> method will be called every time the synchronization sequence (<code>0x55 0x55 0x55 0x55</code>) is received.
+The <code>StringBuffer</code> class uses this to avoid calling your code with an inconsistent string mid-update.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protocolparser">ProtocolParser</h3>
+<div class="paragraph">
+<p>If you feed the export stream data you receive from DCS-BIOS to the <code>processChar</code> method of a <code>ProtocolParser</code> instance, it will interpret the data and ensure that the global <code>onDcsBiosWrite</code> function as well as every <code>ExportStreamListener&#8217;s `onDcsBiosWrite</code> and <code>onDcsBiosFrameSync</code> methods are called with the results.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_dcs_bios_lua_code">The DCS-BIOS Lua Code</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_memorymap_objects">MemoryMap objects</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_adding_a_new_aircraft_module">Adding a New Aircraft Module</h3>
+
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-13 02:33:29 CET
+Last updated 2015-01-13 02:33:31 CET
 </div>
 </div>
 </body>

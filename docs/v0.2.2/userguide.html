@@ -608,9 +608,10 @@ After you read this User Guide, you will be able to connect a simple switch pane
 </div>
 </div>
 <div class="sect3">
-<h4 id="_dcs_bios_will_not_impact_your_pc_s_performance">DCS-BIOS will not impact your PC&#8217;s performance</h4>
+<h4 id="_no_noticeable_performance_impact">No noticeable performance impact</h4>
 <div class="paragraph">
-<p>We did not notice any change in FPS when testing DCS-BIOS.
+<p>On a low-end system (running DCS at 10 to 15 fps), we did not notice any measurable performance impact.
+On a high-end system, running DCS-BIOS reduced the framerate from 55 fps to 52 fps (about 5% slower).
 The additional computation it requires of your PC or its precious resources is negligible.</p>
 </div>
 </div>
@@ -2031,7 +2032,7 @@ The following code should get you started:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="c++"><span class="directive">void</span> updateCautionLights(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> data) {
-    <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> row = (address - <span class="hex">0x10c4</span>) * <span class="integer">2</span>;
+    <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> row = (address - <span class="hex">0x10d4</span>) * <span class="integer">2</span>;
     <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> column = <span class="integer">0</span>;
     <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> i;
     <span class="predefined-type">bool</span> is_on;
@@ -2047,7 +2048,7 @@ The following code should get you started:</p>
     }
 }
 <span class="directive">void</span> onDcsBiosWrite(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> data) {
-    <span class="keyword">if</span> (address &gt;= <span class="hex">0x10c4</span> &amp;&amp; address &lt;= <span class="hex">0x10c8</span>) {
+    <span class="keyword">if</span> (address &gt;= <span class="hex">0x10d4</span> &amp;&amp; address &lt;= <span class="hex">0x10d8</span>) {
        updateCautionLights(address, data);
     }
 }</code></pre>
@@ -2060,7 +2061,7 @@ The following code should get you started:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-13 02:33:42 CET
+Last updated 2015-01-13 02:33:31 CET
 </div>
 </div>
 </body>
