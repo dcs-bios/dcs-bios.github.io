@@ -534,6 +534,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_actionbutton">ActionButton</a></li>
 <li><a href="#_led">LED</a></li>
 <li><a href="#_servooutput">ServoOutput</a></li>
+<li><a href="#_integerbuffer">IntegerBuffer</a></li>
 <li><a href="#_stringbuffer">StringBuffer</a></li>
 </ul>
 </li>
@@ -939,11 +940,11 @@ If you see a red warning instead, you need to enable JavaScript in your web brow
 </div>
 <div class="paragraph">
 <p>This web page is the reference document we are referring to.
-It lists every single DCS module that DCS-BIOS supports (Only the A10 for now), every single panel found in that aircraft, and every single corresponding switch, push button and rotary knob or whatever associated with that panel and the corresponding code that you will use to create your sketch.</p>
+It lists every single DCS module that DCS-BIOS supports, every single panel found in that aircraft, and every single corresponding switch, push button and rotary knob or whatever associated with that panel and the corresponding code that you will use to create your sketch.</p>
 </div>
 <div class="paragraph">
 <p>Along the top of the web page, there are "filters" in the form of drop down menus that can be used to display precisely what you are looking for.
-You have the choice of what aircraft you would like to work with (The A10 is your only choice at the moment), the type of information you would like displayed (basic or advanced) and every single panel on the aircraft you chose to work with.
+You have the choice of what aircraft you would like to work with, the type of information you would like displayed (basic or advanced) and every single panel on the aircraft you chose to work with.
 Stay away from the advanced tab until you know what you are doing.</p>
 </div>
 <div class="ulist">
@@ -1220,37 +1221,23 @@ The information provided at this point may require some level of knowledge with 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++"><span class="preprocessor">#include</span> <span class="include">&lt;DcsBios.h&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
-<span class="preprocessor">#include</span> <span class="include">&lt;Servo.h&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="c++"><span class="comment">/* use '#define DCSBIOS_DEFAULT_SERIAL' instead if your Arduino board
+ *  does not feature an ATMega328 or ATMega2650 controller.
+ */</span>
+<span class="preprocessor">#define</span> DCSBIOS_IRQ_SERIAL <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="preprocessor">#include</span> <span class="include">&quot;DcsBios.h&quot;</span> <i class="conum" data-value="2"></i><b>(2)</b>
 
-<span class="comment">/* paste your code below this line */</span> <i class="conum" data-value="2"></i><b>(2)</b>
-DcsBios::Switch2Pos masterCautionBtn(<span class="string"><span class="delimiter">&quot;</span><span class="content">UFC_MASTER_CAUTION</span><span class="delimiter">&quot;</span></span>, <span class="integer">10</span>);
-DcsBios::LED mcLed(<span class="hex">0x108e</span>, <span class="hex">0x0008</span>, <span class="integer">13</span>);
-
-<span class="comment">/* Do Not change anything below this line unless you know what you are doing */</span>
-DcsBios::ProtocolParser parser; <i class="conum" data-value="3"></i><b>(3)</b>
+DcsBios::LED masterCaution(<span class="hex">0x108e</span>, <span class="hex">0x0008</span>, <span class="integer">13</span>); <i class="conum" data-value="3"></i><b>(3)</b>
+DcsBios::Switch2Pos ufcMasterCaution(<span class="string"><span class="delimiter">&quot;</span><span class="content">UFC_MASTER_CAUTION</span><span class="delimiter">&quot;</span></span>, <span class="integer">10</span>); <i class="conum" data-value="4"></i><b>(4)</b>
 
 <span class="directive">void</span> setup() {
-  Serial.begin(<span class="integer">500000</span>); <i class="conum" data-value="4"></i><b>(4)</b>
+  DcsBios::setup(); <i class="conum" data-value="5"></i><b>(5)</b>
 }
 
 <span class="directive">void</span> loop() {
-    <span class="keyword">while</span> (Serial.available()) {
-      parser.processChar(Serial.read()); <i class="conum" data-value="5"></i><b>(5)</b>
-  }
-
-    DcsBios::PollingInput::pollInputs(); <i class="conum" data-value="6"></i><b>(6)</b>
+  DcsBios::loop(); <i class="conum" data-value="6"></i><b>(6)</b>
 }
 
-
-<span class="directive">void</span> sendDcsBiosMessage(<span class="directive">const</span> <span class="predefined-type">char</span>* msg, <span class="directive">const</span> <span class="predefined-type">char</span>* arg) { <i class="conum" data-value="7"></i><b>(7)</b>
-  Serial.write(msg);
-  Serial.write(<span class="char">' '</span>);
-  Serial.write(arg);
-  Serial.write(<span class="char">'\n'</span>);
-}
-
-<span class="directive">void</span> onDcsBiosWrite(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> value) { <i class="conum" data-value="8"></i><b>(8)</b>
 
 }</code></pre>
 </div>
@@ -1259,53 +1246,28 @@ DcsBios::ProtocolParser parser; <i class="conum" data-value="3"></i><b>(3)</b>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>These are libraries that have been included to make your sketch function apropriately.
-They are always placed at the beginning of a sketch.
-It ensures that the Arduino IDE will include the required libraries when it compilies your sketch for uploading to your board.
-In addition to the <code>DCS-BIOS.h</code> library you will also see that the <code>Servo.h</code> library has been included.
-Please note that even if your sketch does not use the <code>ServoOutput</code> class of controls you still have to include <code>Servo.h</code>.
-Otherwise your sketch will fail to load.</td>
+<td>Before including <code>DcsBios.h</code>, you have to define a preprocessor macro that tells the DCS-BIOS Arduino Library what mode it should operate in. If you are using an Arduino board that has either an ATMega328 or an ATMega2560 chip, such as the Uno, Pro Mini, Nano or Mega 2650 boards, use <code>DCSBIOS_IRQ_SERIAL</code>. If your board has a different microcontroller, you can use <code>DCSBIOS_DEFAULT_SERIAL</code> instead, which should work with any Arduino-compatible board but can cause problems if your sketch spends a long time updating outputs, either because you are outputting to something "slow" like displays or you are using a lot of outputs (such as trying to run a Caution Lights Panel with 48 instances of <code>DcsBios::LED</code>).</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This is the code that you have cut and pasted from the Control-Reference document.  It tells the library what types of controls you are connecting to your Arduino board.
-DCS-BIOS knows how to handle push buttons, toggle switches, rotary encoders, rotary switches, potentiometers, LEDs and servo motors.
-The Arduino Library Reference section (below) documents all of the controls that are available for you to use.</td>
+<td>This line adds the DCS-BIOS Arduino Library to your sketch.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Create an object of type <code>DcsBios::ProtocolParser</code>.
-You need not be concerned with this line of code other than you do not change it.</td>
+<td>This line tells the DCS-BIOS Arduino Library that there is a switch connected to pin 10 that should be mapped to the master caution reset button.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>This line tells the Arduino board at what speed communication will take place between you Arduino board and DCS.
-This setting needs to match the one in <code>connect-serial-port.cmd</code>.
-500000 is the fastest the Arduino can handle and is the default.
-You will probably not need to adjust this whatsoever .</td>
+<td>This line tells the DCS-BIOS Arduino Library to use the built-in LED on your Arduino board, which is connected to pin 13, as a master caution light.
+Refer to the control reference documentation for more examples.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>This statement creates a <code>loop()</code> so the Arduino will continually read data from DCS. It then sends it to the <code>DcsBios::ProtocolParser</code> for additional processing.</td>
+<td>In your <code>setup()</code> function, you have to call <code>DcsBios::setup()</code> to initialize the DCS-BIOS Arduino Library.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>DcsBios::PollingInput::pollInputs()` causes the DCS-BIOS library to check the state of all of your connected push buttons, toggle switches, rotary encoders, etc. If it finds that something has changed it sends a message to DCS to initiate that same change.
-You push your button&#8230;&#8203;DCS shows that button being pushed.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>This line specifies that communication between the Arduino board and your DCS computer will be via "serial port".
-It can, however, be modified so you can use TCP or UDP to communicate.
-We anticiapte that most installation will use a serial port.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
-<td>This is where you can obtain and manipulate the infomation that DCS is exporting.
-You can specify what you wish to obtain such as engin gauge data or CMSP displays that the Ardiuno has receievd from DCS.  You can then send this out to "Real"  gauges or displays on your panels.
-A more detailed explanation of how to get this data and what you can do with it is detailed in the Appendix.
-Even if you do not intend to display anything you still must include this function.
-If you do not, your sketch will fail to upload.</td>
+<td>In your <code>loop()</code> function, you have to call <code>DcsBios::loop()</code>. This causes the DCS-BIOS Arduino library to notify DCS if any inputs (push buttons, switches, etc.) have changed, and to update any outputs (LEDs, servo motors, displays, etc.) with the latest data from DCS.</td>
 </tr>
 </table>
 </div>
@@ -1354,12 +1316,11 @@ If all you see is a big red warning, you need to enable JavaScript and reload th
 <h4 id="_finding_the_control_you_are_looking_for">Finding the Control You Are Looking For</h4>
 <div class="paragraph">
 <p>First, select the module.
-At the moment your only choice is the A10.
 Second, select the type of view.
 Choose Simple if it is not already displayed as the default.
 Finally, the "Category Filter" dropdown box will provide you with a complete listing of all the panels and you can select the panel you are looking for.
 ==== Supported Controls
-DCS-BIOS refers to switches, rotary encoders, potentiometers, push buttons etc. as " CONTROLS".
+DCS-BIOS refers to switches, rotary encoders, potentiometers, push buttons etc. as "CONTROLS".
 The following are all of the supported Controls available in DCS-BIOS:</p>
 </div>
 <div class="ulist">
@@ -1963,6 +1924,49 @@ Servos are devices which have the potential to demand more current than a single
 </div>
 </div>
 <div class="sect2">
+<h3 id="_integerbuffer">IntegerBuffer</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::IntegerBuffer(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> mask, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> shift, <span class="directive">void</span> (*)(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span>) callback)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The IntegerBuffer class is used to handle integer outputs in a generic way. You have to supply your own code to do something useful with the data.</p>
+</div>
+<div class="dlist">
+<div class="title">Constructor Parameters</div>
+<dl>
+<dt class="hdlist1">address</dt>
+<dd>
+<p>The address of the integer output (found in the control reference)</p>
+</dd>
+<dt class="hdlist1">mask</dt>
+<dd>
+<p>The mask of the integer output (found in the control reference)</p>
+</dd>
+<dt class="hdlist1">shift</dt>
+<dd>
+<p>The number of bits to shift left (found in the control reference)</p>
+</dd>
+<dt class="hdlist1">callback</dt>
+<dd>
+<p>A function which accepts an argument of type <code>unsigned int</code>.
+This function will be called whenever the integer output has changed.
+It will be passed the new value as an argument.</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="title">Reference Documentation Code Example</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="c++"><span class="directive">void</span> onAltMslFtChange(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> newValue) {
+    <span class="comment">/* your code here */</span>
+}
+DcsBios::IntegerBuffer altMslFtBuffer(<span class="hex">0x0408</span>, <span class="hex">0xffff</span>, <span class="integer">0</span>, onAltMslFtChange);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_stringbuffer">StringBuffer</h3>
 <div class="listingblock">
 <div class="content">
@@ -1970,7 +1974,7 @@ Servos are devices which have the potential to demand more current than a single
 </div>
 </div>
 <div class="paragraph">
-<p>The StringBuffer class is used to handle string outputs.</p>
+<p>The StringBuffer class is used to handle string outputs in a generic way. You have to supply your own code to do something useful with the data. A common use case is to use another Arduino Library to write it to some kind of display, such as a character LCD with a HD44780 compatible controller chip (LiquidCrystal library), a small OLED display with an SSD1306 controller chip (Adafruit SSD1306 library) or a 7-segment display driven by a MAX7219 chip (LedControl library).</p>
 </div>
 <div class="dlist">
 <div class="title">Constructor Parameters</div>
@@ -2019,49 +2023,13 @@ You can make the viewport 1x1 pixels in size and place it outside of your visibl
 For example, if you have no monitor above the primary one, you could place the viewport at coordinates (0, -10).</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_using_a_led_matrix_for_the_caution_lights">Using a LED matrix for the Caution Lights</h4>
-<div class="paragraph">
-<p>If you are building the Caution Lights panel, you probably don&#8217;t want to use several Arduinos to get 48 output pins.
-You want to use a LED matrix design instead.</p>
-</div>
-<div class="paragraph">
-<p>Fortunately, the caution lights data is located in three consecutive 16-bit integers in the DCS-BIOS export address space.
-The following code should get you started:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++"><span class="directive">void</span> updateCautionLights(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> data) {
-    <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> row = (address - <span class="hex">0x10d4</span>) * <span class="integer">2</span>;
-    <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> column = <span class="integer">0</span>;
-    <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> i;
-    <span class="predefined-type">bool</span> is_on;
-    <span class="keyword">for</span> (i=<span class="integer">0</span>; i&lt;<span class="integer">16</span>; i++) {
-        is_on = data &amp; <span class="hex">0x01</span>;
-        <span class="comment">// set caution light state (row, column, is_on)</span>
-        data &gt;&gt;= <span class="integer">1</span>;
-        column++;
-        <span class="keyword">if</span> (column == <span class="integer">4</span>) {
-           row++;
-           column = <span class="integer">0</span>;
-        }
-    }
-}
-<span class="directive">void</span> onDcsBiosWrite(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> data) {
-    <span class="keyword">if</span> (address &gt;= <span class="hex">0x10d4</span> &amp;&amp; address &lt;= <span class="hex">0x10d8</span>) {
-       updateCautionLights(address, data);
-    }
-}</code></pre>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-01-03 00:53:49 CET
+Last updated 2016-03-04 00:05:16 CET
 </div>
 </div>
 </body>
