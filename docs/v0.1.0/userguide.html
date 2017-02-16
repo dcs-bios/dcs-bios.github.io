@@ -4,20 +4,19 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.2">
+<meta name="generator" content="Asciidoctor 1.5.5">
 <title>DCS-BIOS User Guide</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
-/* Remove the comments around the @import statement below when using this as a custom stylesheet */
-/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400";*/
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
 audio,canvas,video{display:inline-block}
 audio:not([controls]){display:none;height:0}
 [hidden],template{display:none}
 script{display:none!important}
 html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
-body{margin:0}
 a{background:transparent}
 a:focus{outline:thin dotted}
 a:active,a:hover{outline:0}
@@ -52,12 +51,11 @@ textarea{overflow:auto;vertical-align:top}
 table{border-collapse:collapse;border-spacing:0}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
 html,body{font-size:100%}
-body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
 a:hover{cursor:pointer}
 img,object,embed{max-width:100%;height:auto}
 object,embed{height:100%}
 img{-ms-interpolation-mode:bicubic}
-#map_canvas img,#map_canvas embed,#map_canvas object,.map_canvas img,.map_canvas embed,.map_canvas object{max-width:none!important}
 .left{float:left!important}
 .right{float:right!important}
 .text-left{text-align:left!important}
@@ -65,10 +63,11 @@ img{-ms-interpolation-mode:bicubic}
 .text-center{text-align:center!important}
 .text-justify{text-align:justify!important}
 .hide{display:none}
-.antialiased,body{-webkit-font-smoothing:antialiased}
-img{display:inline-block;vertical-align:middle}
+img,object,svg{display:inline-block;vertical-align:middle}
 textarea{height:auto;min-height:50px}
 select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
 p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
 .subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
 div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
@@ -111,7 +110,8 @@ blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
 h1{font-size:2.75em}
 h2{font-size:2.3125em}
 h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
-h4{font-size:1.4375em}}table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
 table thead,table tfoot{background:#f7f8f7;font-weight:bold}
 table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
 table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
@@ -121,10 +121,14 @@ h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-s
 h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
 .clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
 .clearfix:after,.float-group:after{clear:both}
-*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
 pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
 .keyseq{color:rgba(51,51,51,.8)}
-kbd{display:inline-block;color:rgba(0,0,0,.8);font-size:.75em;line-height:1.4;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:-.15em .15em 0 .15em;padding:.2em .6em .2em .5em;vertical-align:middle;white-space:nowrap}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
 .keyseq kbd:first-child{margin-left:0}
 .keyseq kbd:last-child{margin-right:0}
 .menuseq,.menu{color:rgba(0,0,0,.8)}
@@ -155,29 +159,33 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toc ul.sectlevel0>li>a{font-style:italic}
 #toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
 #toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
 #toc a{text-decoration:none}
 #toc a:active{text-decoration:underline}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media only screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
 #toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
-#toc.toc2 #toctitle{margin-top:0;font-size:1.2em}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
 #toc.toc2 ul ul{margin-left:0;padding-left:1em}
 #toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
 body.toc2.toc-right{padding-left:0;padding-right:15em}
-body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
 #toc.toc2{width:20em}
 #toc.toc2 #toctitle{font-size:1.375em}
 #toc.toc2>ul{font-size:.95em}
 #toc.toc2 ul ul{padding-left:1.25em}
-body.toc2.toc-right{padding-left:0;padding-right:20em}}#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
 #content #toc>:first-child{margin-top:0}
 #content #toc>:last-child{margin-bottom:0}
 #footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
 #footer-text{color:rgba(255,255,255,.8);line-height:1.44}
 .sect1{padding-bottom:.625em}
-@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}.sect1+.sect1{border-top:1px solid #efefed}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
 #content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
 #content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
 #content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
@@ -206,7 +214,9 @@ table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inh
 .sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
 .literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
 .literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
-@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
 .listingblock pre.highlightjs{padding:0}
 .listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
 .listingblock pre.prettyprint{border-width:0}
@@ -216,7 +226,7 @@ table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inh
 .listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
 .listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
 table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
 table.pyhltable td.code{padding-left:.75em;padding-right:0}
 pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
 pre.pygments .lineno{display:inline-block;margin-right:.25em}
@@ -237,13 +247,12 @@ table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
 .verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
 .quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
 .quoteblock .attribution br,.verseblock .attribution br{display:none}
-.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.05em;color:rgba(0,0,0,.6)}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
 .quoteblock.abstract{margin:0 0 1.25em 0;display:block}
 .quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
 .quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
 table.tableblock{max-width:100%;border-collapse:separate}
 table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
-table.spread{width:100%}
 table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
 table.grid-all th.tableblock,table.grid-all td.tableblock{border-width:0 1px 1px 0}
 table.grid-all tfoot>tr>th.tableblock,table.grid-all tfoot>tr>td.tableblock{border-width:1px 1px 0 0}
@@ -289,8 +298,8 @@ ol.upperroman{list-style-type:upper-roman}
 ol.lowergreek{list-style-type:lower-greek}
 .hdlist>table,.colist>table{border:0;background:none}
 .hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
-td.hdlist1{padding-right:.75em;font-weight:bold}
-td.hdlist1,td.hdlist2{vertical-align:top}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
 .literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
 .colist>table tr>td:first-of-type{padding:0 .75em;line-height:1}
 .colist>table tr>td:last-of-type{padding:.25em 0}
@@ -303,13 +312,14 @@ td.hdlist1,td.hdlist2{vertical-align:top}
 .image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
 .image.left{margin-right:.625em}
 .image.right{margin-left:.625em}
-a.image{text-decoration:none}
-span.footnote,span.footnoteref{vertical-align:super;font-size:.875em}
-span.footnote a,span.footnoteref a{text-decoration:none}
-span.footnote a:active,span.footnoteref a:active{text-decoration:underline}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
-#footnotes .footnote{padding:0 .375em;line-height:1.3;font-size:.875em;margin-left:1.2em;text-indent:-1.2em;margin-bottom:.2em}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
@@ -367,11 +377,10 @@ span.icon>.fa{cursor:default}
 pre .conum[data-value]{position:relative;top:-.125em}
 b.conum *{color:inherit!important}
 .conum:not([data-value]):empty{display:none}
-h1,h2{letter-spacing:-.01em}
-dt,th.tableblock,td.content{text-rendering:optimizeLegibility}
-p,td.content{letter-spacing:-.01em}
-p strong,td.content strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content{font-size:1.0625rem}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -382,9 +391,9 @@ a{color:inherit!important;text-decoration:underline!important}
 a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
 a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
 abbr[title]:after{content:" (" attr(title) ")"}
-pre,blockquote,tr,img{page-break-inside:avoid}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
 thead{display:table-header-group}
-img{max-width:100%!important}
+svg{max-width:100%}
 p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
 h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
 #toc,.sidebarblock,.exampleblock>.content{background:none!important}
@@ -408,15 +417,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
 /*pre.CodeRay {background-color:#f7f7f8;}*/
 .CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
 .CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
-.CodeRay .line-numbers strong{font-weight: normal}
+.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
 table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
-table.CodeRay td{vertical-align: top}
+table.CodeRay td{vertical-align: top;line-height:1.45}
 table.CodeRay td.line-numbers{text-align:right}
 table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
 table.CodeRay td.code{padding:0 0 0 .5em}
@@ -451,7 +460,7 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .hex{color:#058}
 .CodeRay .integer,.CodeRay .float{color:#099}
 .CodeRay .include{color:#555}
-.CodeRay .inline{color:#00}
+.CodeRay .inline{color:#000}
 .CodeRay .inline .inline{background:#ccc}
 .CodeRay .inline .inline .inline{background:#bbb}
 .CodeRay .inline .inline-delimiter{color:#d14}
@@ -751,7 +760,7 @@ That can mean a "breadboard" and jumper wires, a soldering iron, a wire wrap too
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="predefined">dofile</span>(lfs.writedir()..<span class="string"><span class="delimiter">[[</span><span class="content">Scripts\DCS-BIOS\BIOS.lua</span><span class="delimiter">]]</span></span>)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">dofile(lfs.writedir()..[[Scripts\DCS-BIOS\BIOS.lua]])</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -1018,15 +1027,15 @@ DcsBios::LED masterCaution(0x108e, 0x0008, 13);</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++"><span class="preprocessor">#include</span> <span class="include">&lt;DcsBios.h&gt;</span>
-<span class="preprocessor">#include</span> <span class="include">&lt;Servo.h&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="c++">#include &lt;DcsBios.h&gt;
+#include &lt;Servo.h&gt;
 
-<span class="comment">/**** Paste your code below here ****/</span>
+/**** Paste your code below here ****/
 
-DcsBios::LED masterCaution(<span class="hex">0x108e</span>, <span class="hex">0x0008</span>, <span class="integer">13</span>);
-DcsBios::Switch2Pos ufcMasterCaution(<span class="string"><span class="delimiter">&quot;</span><span class="content">UFC_MASTER_CAUTION</span><span class="delimiter">&quot;</span></span>, <span class="integer">10</span>);
+DcsBios::LED masterCaution(0x108e, 0x0008, 13);
+DcsBios::Switch2Pos ufcMasterCaution("UFC_MASTER_CAUTION", 10);
 
-<span class="comment">/**** Do not change anything below this line ****/</span></code></pre>
+/**** Do not change anything below this line ****/</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -1219,22 +1228,22 @@ The information provided at this point may require some level of knowledge with 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++"><span class="preprocessor">#include</span> <span class="include">&lt;DcsBios.h&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
-<span class="preprocessor">#include</span> <span class="include">&lt;Servo.h&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="c++">#include &lt;DcsBios.h&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+#include &lt;Servo.h&gt;
 
-<span class="comment">/* paste your code below this line */</span> <i class="conum" data-value="2"></i><b>(2)</b>
-DcsBios::Switch2Pos masterCautionBtn(<span class="string"><span class="delimiter">&quot;</span><span class="content">UFC_MASTER_CAUTION</span><span class="delimiter">&quot;</span></span>, <span class="integer">10</span>);
-DcsBios::LED mcLed(<span class="hex">0x108e</span>, <span class="hex">0x0008</span>, <span class="integer">13</span>);
+/* paste your code below this line */ <i class="conum" data-value="2"></i><b>(2)</b>
+DcsBios::Switch2Pos masterCautionBtn("UFC_MASTER_CAUTION", 10);
+DcsBios::LED mcLed(0x108e, 0x0008, 13);
 
-<span class="comment">/* Do Not change anything below this line unless you know what you are doing */</span>
+/* Do Not change anything below this line unless you know what you are doing */
 DcsBios::ProtocolParser parser; <i class="conum" data-value="3"></i><b>(3)</b>
 
-<span class="directive">void</span> setup() {
-  Serial.begin(<span class="integer">500000</span>); <i class="conum" data-value="4"></i><b>(4)</b>
+void setup() {
+  Serial.begin(500000); <i class="conum" data-value="4"></i><b>(4)</b>
 }
 
-<span class="directive">void</span> loop() {
-    <span class="keyword">while</span> (Serial.available()) {
+void loop() {
+    while (Serial.available()) {
       parser.processChar(Serial.read()); <i class="conum" data-value="5"></i><b>(5)</b>
   }
 
@@ -1242,14 +1251,14 @@ DcsBios::ProtocolParser parser; <i class="conum" data-value="3"></i><b>(3)</b>
 }
 
 
-<span class="directive">void</span> sendDcsBiosMessage(<span class="directive">const</span> <span class="predefined-type">char</span>* msg, <span class="directive">const</span> <span class="predefined-type">char</span>* arg) { <i class="conum" data-value="7"></i><b>(7)</b>
+void sendDcsBiosMessage(const char* msg, const char* arg) { <i class="conum" data-value="7"></i><b>(7)</b>
   Serial.write(msg);
-  Serial.write(<span class="char">' '</span>);
+  Serial.write(' ');
   Serial.write(arg);
-  Serial.write(<span class="char">'\n'</span>);
+  Serial.write('\n');
 }
 
-<span class="directive">void</span> onDcsBiosWrite(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> value) { <i class="conum" data-value="8"></i><b>(8)</b>
+void onDcsBiosWrite(unsigned int address, unsigned int value) { <i class="conum" data-value="8"></i><b>(8)</b>
 
 }</code></pre>
 </div>
@@ -1316,8 +1325,8 @@ If you do not, your sketch will fail to upload.</td>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch2Pos masterCautionBtn(<span class="string"><span class="delimiter">&quot;</span><span class="content">UFC_MASTER_CAUTION</span><span class="delimiter">&quot;</span></span>, <span class="integer">10</span>);
-DcsBios::LED masterCautionLED(<span class="string"><span class="delimiter">&quot;</span><span class="content">MASTER_CAUTION</span><span class="delimiter">&quot;</span></span>, <span class="integer">13</span>);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch2Pos masterCautionBtn("UFC_MASTER_CAUTION", 10);
+DcsBios::LED masterCautionLED("MASTER_CAUTION", 13);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1568,7 +1577,7 @@ For the same control, you could also choose to use a rotary encoder.</p>
 <h3 id="_switch2pos">Switch2Pos</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch2Pos(<span class="predefined-type">char</span>* message, <span class="predefined-type">char</span> pin)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch2Pos(char* message, char pin)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1594,12 +1603,12 @@ For the same control, you could also choose to use a rotary encoder.</p>
 <div class="listingblock">
 <div class="title">Reference Documentation Code Examples</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch2Pos ahcpCicu(<span class="string"><span class="delimiter">&quot;</span><span class="content">AHCP_CICU</span><span class="delimiter">&quot;</span></span>, PIN);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch2Pos ahcpCicu("AHCP_CICU", PIN);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch2Pos ufcHack(<span class="string"><span class="delimiter">&quot;</span><span class="content">UFC_HACK</span><span class="delimiter">&quot;</span></span>, PIN);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch2Pos ufcHack("UFC_HACK", PIN);</code></pre>
 </div>
 </div>
 </div>
@@ -1607,7 +1616,7 @@ For the same control, you could also choose to use a rotary encoder.</p>
 <h3 id="_switch3pos">Switch3Pos</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch3Pos(<span class="predefined-type">char</span>* message, <span class="predefined-type">char</span> pinA, <span class="predefined-type">char</span> pinB)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch3Pos(char* message, char pinA, char pinB)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1645,7 +1654,7 @@ For the same control, you could also choose to use a rotary encoder.</p>
 <div class="listingblock">
 <div class="title">Reference Documentation Code Examples</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch3Pos aapSteer(<span class="string"><span class="delimiter">&quot;</span><span class="content">AAP_STEER</span><span class="delimiter">&quot;</span></span>, PIN_A, PIN_B);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Switch3Pos aapSteer("AAP_STEER", PIN_A, PIN_B);</code></pre>
 </div>
 </div>
 </div>
@@ -1653,7 +1662,7 @@ For the same control, you could also choose to use a rotary encoder.</p>
 <h3 id="_switchmultipos">SwitchMultiPos</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::SwitchMultiPos(<span class="predefined-type">char</span>* message, <span class="directive">const</span> byte* pins, <span class="predefined-type">char</span> numberOfPins);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::SwitchMultiPos(char* message, const byte* pins, char numberOfPins);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1684,17 +1693,17 @@ The first pin number corresponds to state 0 of the input, the second to state 1,
 <div class="listingblock">
 <div class="title">Reference Documentation Code Examples</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++"><span class="directive">const</span> byte aapSteerptPins[<span class="integer">3</span>] = {PIN_0, ... ,PIN_2};
-DcsBios::SwitchMultiPos aapSteerpt(<span class="string"><span class="delimiter">&quot;</span><span class="content">AAP_STEERPT</span><span class="delimiter">&quot;</span></span>, aapSteerptPins, <span class="integer">3</span>);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">const byte aapSteerptPins[3] = {PIN_0, ... ,PIN_2};
+DcsBios::SwitchMultiPos aapSteerpt("AAP_STEERPT", aapSteerptPins, 3);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++"><span class="comment">// A rotary switch that controls the A-10C steerpoint mode (FLTPLAN / MARK / MISSION)</span>
-<span class="comment">// is connected to digital pins 10, 11 and 12</span>
-<span class="directive">const</span> byte aapSteerptPins[<span class="integer">3</span>] = {<span class="integer">10</span>, <span class="integer">11</span>, <span class="integer">12</span>};
-DcsBios::SwitchMultiPos aapSteerpt(<span class="string"><span class="delimiter">&quot;</span><span class="content">AAP_STEERPT</span><span class="delimiter">&quot;</span></span>, aapSteerptPins, <span class="integer">3</span>);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">// A rotary switch that controls the A-10C steerpoint mode (FLTPLAN / MARK / MISSION)
+// is connected to digital pins 10, 11 and 12
+const byte aapSteerptPins[3] = {10, 11, 12};
+DcsBios::SwitchMultiPos aapSteerpt("AAP_STEERPT", aapSteerptPins, 3);</code></pre>
 </div>
 </div>
 </div>
@@ -1702,7 +1711,7 @@ DcsBios::SwitchMultiPos aapSteerpt(<span class="string"><span class="delimiter">
 <h3 id="_potentiometer">Potentiometer</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Potentiometer(<span class="predefined-type">char</span>* message, <span class="predefined-type">char</span> pin);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Potentiometer(char* message, char pin);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1737,7 +1746,7 @@ Connect the middle pin to the Arduino.</p>
 <div class="listingblock">
 <div class="title">Reference Documentation Code Example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Potentiometer cmscBrt(<span class="string"><span class="delimiter">&quot;</span><span class="content">CMSC_BRT</span><span class="delimiter">&quot;</span></span>, PIN);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::Potentiometer cmscBrt("CMSC_BRT", PIN);</code></pre>
 </div>
 </div>
 </div>
@@ -1745,7 +1754,7 @@ Connect the middle pin to the Arduino.</p>
 <h3 id="_rotaryencoder">RotaryEncoder</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::RotaryEncoder(<span class="directive">const</span> <span class="predefined-type">char</span>* message, <span class="directive">const</span> <span class="predefined-type">char</span>* decArg, <span class="directive">const</span> <span class="predefined-type">char</span>* incArg, <span class="predefined-type">char</span> pinA, <span class="predefined-type">char</span> pinB);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::RotaryEncoder(const char* message, const char* decArg, const char* incArg, char pinA, char pinB);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1792,7 +1801,7 @@ Connect the left pin and right pins to any two of the Arduino pins 2 through 12,
 <div class="listingblock">
 <div class="title">Reference Documentation Code Example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::RotaryEncoder tacan1(<span class="string"><span class="delimiter">&quot;</span><span class="content">TACAN_1</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">DEC</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">INC</span><span class="delimiter">&quot;</span></span>, PIN_A, PIN_B);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::RotaryEncoder tacan1("TACAN_1", "DEC", "INC", PIN_A, PIN_B);</code></pre>
 </div>
 </div>
 </div>
@@ -1833,13 +1842,13 @@ Connect the left pin and right pins to any two of the Arduino pins 2 through 12,
 <div class="listingblock">
 <div class="title">Reference Documentation Code Example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::ActionButton ahcpCicuToggle(<span class="string"><span class="delimiter">&quot;</span><span class="content">AHCP_CICU</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">TOGGLE</span><span class="delimiter">&quot;</span></span>, PIN);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::ActionButton ahcpCicuToggle("AHCP_CICU", "TOGGLE", PIN);</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Code Examples</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::ActionButton ahcpCicuToggle(<span class="string"><span class="delimiter">&quot;</span><span class="content">AHCP_CICU</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">TOGGLE</span><span class="delimiter">&quot;</span></span>, <span class="integer">10</span>);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::ActionButton ahcpCicuToggle("AHCP_CICU", "TOGGLE", 10);</code></pre>
 </div>
 </div>
 </div>
@@ -1847,7 +1856,7 @@ Connect the left pin and right pins to any two of the Arduino pins 2 through 12,
 <h3 id="_led">LED</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::LED(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> mask, <span class="predefined-type">char</span> pin)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::LED(unsigned int address, unsigned int mask, char pin)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1879,7 +1888,7 @@ Connect the left pin and right pins to any two of the Arduino pins 2 through 12,
 <div class="listingblock">
 <div class="title">Reference Documentation Code Example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::LED tacanTest(<span class="hex">0x10ca</span>, <span class="hex">0x0400</span>, PIN);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::LED tacanTest(0x10ca, 0x0400, PIN);</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1900,7 +1909,7 @@ Multiple LED&#8217;s connected to a single pin will require additional circuitry
 <h3 id="_servooutput">ServoOutput</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::ServoOutput (<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">char</span> pin, <span class="predefined-type">int</span> minPulseWidth, <span class="predefined-type">int</span> maxPulseWidth)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::ServoOutput (unsigned int address, char pin, int minPulseWidth, int maxPulseWidth)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1945,7 +1954,7 @@ You will have to choose these values so that the minimum and maximum positions a
 <div class="listingblock">
 <div class="title">Reference Documentation Code Example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::ServoOutput vvi(<span class="hex">0x106e</span>, PIN, <span class="integer">544</span>, <span class="integer">2400</span>);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::ServoOutput vvi(0x106e, PIN, 544, 2400);</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1965,7 +1974,7 @@ Servos are devices which have the potential to demand more current than a single
 <h3 id="_stringbuffer">StringBuffer</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::StringBuffer&lt;MAXLENGTH&gt;(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="directive">void</span> (*)(<span class="predefined-type">char</span>*) callback)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="c++">DcsBios::StringBuffer&lt;MAXLENGTH&gt;(unsigned int address, void (*)(char*) callback)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1993,10 +2002,10 @@ It will be passed the new value as an argument.</p>
 <div class="listingblock">
 <div class="title">Reference Documentation Code Example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++"><span class="directive">void</span> onUhfFrequencyChange(<span class="predefined-type">char</span>* newValue) {
-    <span class="comment">/* your code here */</span>
+<pre class="CodeRay highlight"><code data-lang="c++">void onUhfFrequencyChange(char* newValue) {
+    /* your code here */
 }
-DcsBios::StringBuffer&lt;<span class="integer">7</span>&gt; uhfFrequencyBuffer(<span class="hex">0x1170</span>, onUhfFrequencyChange);</code></pre>
+DcsBios::StringBuffer&lt;7&gt; uhfFrequencyBuffer(0x1170, onUhfFrequencyChange);</code></pre>
 </div>
 </div>
 </div>
@@ -2030,24 +2039,24 @@ The following code should get you started:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="c++"><span class="directive">void</span> updateCautionLights(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> data) {
-    <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> row = (address - <span class="hex">0x10c4</span>) * <span class="integer">2</span>;
-    <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> column = <span class="integer">0</span>;
-    <span class="predefined-type">unsigned</span> <span class="predefined-type">char</span> i;
-    <span class="predefined-type">bool</span> is_on;
-    <span class="keyword">for</span> (i=<span class="integer">0</span>; i&lt;<span class="integer">16</span>; i++) {
-        is_on = data &amp; <span class="hex">0x01</span>;
-        <span class="comment">// set caution light state (row, column, is_on)</span>
-        data &gt;&gt;= <span class="integer">1</span>;
+<pre class="CodeRay highlight"><code data-lang="c++">void updateCautionLights(unsigned int address, unsigned int data) {
+    unsigned char row = (address - 0x10c4) * 2;
+    unsigned char column = 0;
+    unsigned char i;
+    bool is_on;
+    for (i=0; i&lt;16; i++) {
+        is_on = data &amp; 0x01;
+        // set caution light state (row, column, is_on)
+        data &gt;&gt;= 1;
         column++;
-        <span class="keyword">if</span> (column == <span class="integer">4</span>) {
+        if (column == 4) {
            row++;
-           column = <span class="integer">0</span>;
+           column = 0;
         }
     }
 }
-<span class="directive">void</span> onDcsBiosWrite(<span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> address, <span class="predefined-type">unsigned</span> <span class="predefined-type">int</span> data) {
-    <span class="keyword">if</span> (address &gt;= <span class="hex">0x10c4</span> &amp;&amp; address &lt;= <span class="hex">0x10c8</span>) {
+void onDcsBiosWrite(unsigned int address, unsigned int data) {
+    if (address &gt;= 0x10c4 &amp;&amp; address &lt;= 0x10c8) {
        updateCautionLights(address, data);
     }
 }</code></pre>
@@ -2060,7 +2069,7 @@ The following code should get you started:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-03-04 00:05:15 CET
+Last updated 2017-02-16 06:31:17 CET
 </div>
 </div>
 </body>
