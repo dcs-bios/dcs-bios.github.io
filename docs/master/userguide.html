@@ -1126,18 +1126,34 @@ When it disappears the upload is complete.</p>
 <div class="sect3">
 <h4 id="_step_6_test_your_new_panel">Step 6: Test your new panel</h4>
 <div class="paragraph">
-<p>DCS-BIOS comes with a script that automatically connects a serial port to DCS.
+<p>DCS-BIOS comes with a script that connects a serial port to DCS.
 This  serial port is the means by which your PC and your Arduino Board communicate.
-To initiated this connection you need specify the COM Port to use.
-You will use the same COM Port that the Arduino IDE used to program your board.
-To begin&#8230;&#8203;</p>
+To initiate this connection you need specify the COM Port to use.
+You will use the same COM Port that the Arduino IDE used to program your board.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Double-click <code>connect-serial-port.cmd</code> which is in the DCS-BIOS folder you previously downloaded.
+A console window should pop up. Type in the number of the COM port that your Arduino board is connected to and press Return.
+Leave the console window open.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>You can now start DCS and try your new panel in action!</strong></p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t want to type in the COM port number every time you run the script, you can edit the script
+(or a copy of it) so it always uses the same port:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>Start Notepad++.
-Open the`connect-serial-port.cmd` file which is in the DCS-BIOS folder you previously downloaded.
-With the file on the screen the second line will read as:</p>
+Open the <code>connect-serial-port.cmd</code> file which is in the DCS-BIOS folder you previously downloaded.
+Near the top of the file, you will see a line that says <code>set COMPORT=ASK</code>. Replace <code>ASK</code> with the number of the COM port you wish this script to use.
+For example, to use COM5, the line should look like this:</p>
 </li>
 </ul>
 </div>
@@ -1149,20 +1165,21 @@ With the file on the screen the second line will read as:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Replace the number 5 with the COM port number that your Arduino board is connected to.</p>
-</li>
-<li>
 <p>Save the file and close Notepad++.</p>
-</li>
-<li>
-<p>Double-click <code>connect-serial-port.cmd</code>.
-A console window should pop up.
-Leave it open.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>You can now start DCS and try your new panel in action!</strong></p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you make a copy of the script, you need to place it in the same folder as the original. Otherwise it will not find the <code>socat</code> executable.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -1189,16 +1206,13 @@ Leave it open.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>It can&#8217;t get much easier then that.</strong></p>
-</div>
 </div>
 <div class="sect3">
 <h4 id="_what_this_guide_strong_is_not_strong">What this Guide <strong>IS NOT</strong></h4>
 <div class="paragraph">
 <p>If your intent is to include displays and/or analog gauges with your panels you will need to have additional programming knowledge.
 There are displays in the aircraft that could incorporate LCD displays, LED displays or OLED displays.
-In addition there are analog Gauges in the cockpit that could be built using stepper motors, servos&#8217;s or even air core motors.
+In addition there are analog Gauges in the cockpit that could be built using stepper motors, servos or even air core motors.
 With such a wide choice of components available, it really is beyond the scope of this particular document to provide instruction on every possible solution.</p>
 </div>
 </div>
@@ -2038,7 +2052,7 @@ For example, if you have no monitor above the primary one, you could place the v
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-22 14:21:11 CEST
+Last updated 2017-09-06 18:28:17 CEST
 </div>
 </div>
 </body>

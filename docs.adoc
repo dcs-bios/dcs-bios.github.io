@@ -1,5 +1,5 @@
 
-.v0.5.3
-* link:docs/v0.5.3/userguide.html[User Guide for v0.5.3]
-* link:docs/v0.5.3/developerguide.html[Developer Guide for v0.5.3]
-* link:docs/v0.5.3/control-reference.html[Control Reference for v0.5.3]
+.v0.6.0
+* link:docs/v0.6.0/userguide.html[User Guide for v0.6.0]
+* link:docs/v0.6.0/developerguide.html[Developer Guide for v0.6.0]
+* link:docs/v0.6.0/control-reference.html[Control Reference for v0.6.0]
