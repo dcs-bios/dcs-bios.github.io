@@ -1,0 +1,132 @@
+{"version": 1,
+"plugins":
+[
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-a-4e-c.git",
+        "description": "A-4E-C"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-a-10c.git",
+		"recommendForModPath": "mods/aircraft/A-10C",
+        "description": "A-10C"
+		
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-ajs37.git",
+        "description": "AJS37"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-av8bna.git",
+		"recommendForModPath": "mods/aircraft/AV8BNA",
+        "description": "AV8BNA"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-bf-109k-4.git",
+        "description": "Bf-109K-4"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-c-101cc.git",
+        "description": "C-101CC"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-christen-eagle-ii.git",
+        "description": "Christen Eagle II"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-commondata.git",
+        "description": "CommonData"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-f-5e-3.git",
+        "description": "F-5E-3"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-f-14b.git",
+        "description": "F-14B"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-f-16c-50.git",
+        "description": "F-16C_50"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-f-86f-sabre.git",
+        "description": "F-86F Sabre"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-fa-18c-hornet.git",
+        "description": "FA-18C_hornet"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-fc3.git",
+        "description": "FC3"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-fw-190a8.git",
+        "description": "FW-190A8"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-fw-190d9.git",
+        "description": "FW-190D9"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-i-16.git",
+        "description": "I-16"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-ka-50.git",
+        "description": "Ka-50"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-l-39za.git",
+        "description": "L-39ZA"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-m-2000c.git",
+        "description": "M-2000C"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-mb-339pan.git",
+        "description": "MB-339PAN"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-mi-8mt.git",
+        "description": "Mi-8MT"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-mig-15bis.git",
+        "description": "MiG-15bis"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-mig-19p.git",
+        "description": "MiG-19P"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-mig-21bis.git",
+        "description": "MiG-21Bis"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-ns430.git",
+        "description": "NS430"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-p-51d.git",
+        "description": "P-51D"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-sa342m.git",
+        "description": "SA342M"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-spitfire-lfmkix.git",
+        "description": "SpitfireLFMkIX"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-uh-1h.git",
+        "description": "UH-1H"
+    },
+    {
+        "cloneURL": "https://github.com/dcs-bios/module-yak-52.git",
+        "description": "Yak-52"
+    }
+]
+}
