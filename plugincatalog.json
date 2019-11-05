@@ -13,6 +13,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-ajs37.git",
+	"recommendForModPath": "mods/aircraft/AJS37",
         "description": "AJS37"
     },
     {
@@ -54,6 +55,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-fa-18c-hornet.git",
+	"recommendForModPath": "mods/aircraft/FA-18C",
         "description": "FA-18C_hornet"
     },
     {
@@ -74,6 +76,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-ka-50.git",
+	"recommendForModPath": "mods/aircraft/Ka-50",
         "description": "Ka-50"
     },
     {
@@ -90,6 +93,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-mi-8mt.git",
+	"recommendForModPath": "mods/aircraft/Mi-8MTV2",
         "description": "Mi-8MT"
     },
     {
@@ -114,6 +118,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-sa342m.git",
+	"recommendForModPath": "mods/aircraft/SA342",
         "description": "SA342M"
     },
     {
@@ -122,6 +127,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-uh-1h.git",
+	"recommendForModPath": "mods/aircraft/Uh-1H",
         "description": "UH-1H"
     },
     {
