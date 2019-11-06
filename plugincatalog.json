@@ -7,7 +7,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-a-10c.git",
-		"recommendForModPath": "mods/aircraft/A-10C",
+	"recommendForModPath": "mods/aircraft/A-10C",
         "description": "A-10C"
 		
     },
@@ -18,19 +18,22 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-av8bna.git",
-		"recommendForModPath": "mods/aircraft/AV8BNA",
+	"recommendForModPath": "mods/aircraft/AV8BNA",
         "description": "AV8BNA"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-bf-109k-4.git",
+	"recommendForModPath": "mods/aircraft/Bf-109K-4",
         "description": "Bf-109K-4"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-c-101cc.git",
+	"recommendForModPath": "mods/aircraft/C-101",
         "description": "C-101CC"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-christen-eagle-ii.git",
+	"recommendForModPath": "mods/aircraft/Christen Eagle II",
         "description": "Christen Eagle II"
     },
     {
@@ -39,18 +42,22 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-f-5e-3.git",
+	"recommendForModPath": "mods/aircraft/F-5E",
         "description": "F-5E-3"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-f-14b.git",
+	"recommendForModPath": "mods/aircraft/F14",
         "description": "F-14B"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-f-16c-50.git",
+	"recommendForModPath": "mods/aircraft/F-16C",
         "description": "F-16C_50"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-f-86f-sabre.git",
+	"recommendForModPath": "mods/aircraft/F-86",
         "description": "F-86F Sabre"
     },
     {
@@ -60,14 +67,17 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-fc3.git",
+	"recommendForModPath": "mods/aircraft/Flaming Cliffs",
         "description": "FC3"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-fw-190a8.git",
+	"recommendForModPath": "mods/aircraft/FW-190D9",
         "description": "FW-190A8"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-fw-190d9.git",
+	"recommendForModPath": "mods/aircraft/FW-190D9",
         "description": "FW-190D9"
     },
     {
@@ -81,10 +91,12 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-l-39za.git",
+	"recommendForModPath": "mods/aircraft/L-39C",
         "description": "L-39ZA"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-m-2000c.git",
+	"recommendForModPath": "mods/aircraft/M-2000C",
         "description": "M-2000C"
     },
     {
@@ -98,22 +110,27 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-mig-15bis.git",
+	"recommendForModPath": "mods/aircraft/MiG-15bis",
         "description": "MiG-15bis"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-mig-19p.git",
+	"recommendForModPath": "mods/aircraft/MiG-19P",
         "description": "MiG-19P"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-mig-21bis.git",
+	"recommendForModPath": "mods/aircraft/MiG-21BIS",
         "description": "MiG-21Bis"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-ns430.git",
+	"recommendForModPath": "mods/aircraft/NS430",
         "description": "NS430"
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-p-51d.git",
+	"recommendForModPath": "mods/aircraft/P-51D",
         "description": "P-51D"
     },
     {
@@ -123,6 +140,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-spitfire-lfmkix.git",
+	"recommendForModPath": "mods/aircraft/SpitfireLFMkIX",
         "description": "SpitfireLFMkIX"
     },
     {
@@ -132,6 +150,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-yak-52.git",
+	"recommendForModPath": "mods/aircraft/Yak-52",
         "description": "Yak-52"
     }
 ]
