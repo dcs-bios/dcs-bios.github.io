@@ -82,6 +82,7 @@
     },
     {
         "cloneURL": "https://github.com/dcs-bios/module-i-16.git",
+	"recommendForModPath": "mods/aircraft/I-16",
         "description": "I-16"
     },
     {
